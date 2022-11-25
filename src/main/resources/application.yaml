@@ -1,0 +1,17 @@
+server:
+  port: 30000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: gateway_demo_1
+          uri: http://127.0.0.1:9080
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1 #?????????????server1, eg: http://127.0.0.1:30000/server1/index => http://127.0.0.1:31000/index
+
+
+# 配置需要监测的切面范围，语法参考aop的@pointcut
+ko-time:
+  pointcut: execution(public * org.apache.skywalking..*.*(..))
